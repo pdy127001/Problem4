@@ -45,7 +45,22 @@ public:
         return search.search(recipes);
     }
 };
-
+void printRecipes(const vector<PotionRecipe>& foundRecipes) {
+    if (!foundRecipes.empty()) {
+        std::cout << "검색 결과:" << std::endl;
+        for (const auto& recipe : foundRecipes) {
+            std::cout << "- 물약 이름: " << recipe.potionName << std::endl;
+            std::cout << "  > 필요 재료: ";
+            for (size_t j = 0; j < recipe.ingredients.size(); ++j) {
+                std::cout << recipe.ingredients[j];
+                if (j < recipe.ingredients.size() - 1) {
+                    std::cout << ", ";
+                }
+            }
+            std::cout << std::endl;
+        }
+    }
+}
 int main() {
     AlchemyWorkshop myWorkshop;
 
@@ -109,22 +124,7 @@ int main() {
 			std::cin.ignore(10000, '\n');
             std::getline(std::cin, potionName);
 			SearchRecipeByName searchByName(potionName);
-			std::vector<PotionRecipe> foundRecipes = myWorkshop.searchRecipe(searchByName);
-			if (!foundRecipes.empty()) {
-                std::cout << "검색 결과:" << std::endl;
-                for (const auto& recipe : foundRecipes) {
-                    std::cout << "- 물약 이름: " << recipe.potionName << std::endl;
-                    std::cout << "  > 필요 재료: ";
-                    for (size_t j = 0; j < recipe.ingredients.size(); ++j) {
-                        std::cout << recipe.ingredients[j];
-                        if (j < recipe.ingredients.size() - 1) {
-                            std::cout << ", ";
-                        }
-                    }
-                    std::cout << std::endl;
-                }
-			}
-
+			printRecipes(myWorkshop.searchRecipe(searchByName));
         }
         else if (choice == 4) {
 			std::string ingredientName;
@@ -132,21 +132,7 @@ int main() {
 			std::cin.ignore(10000, '\n');
 			std::getline(std::cin, ingredientName);
 			SearchRecipeByIngredient searchByIngredient(ingredientName);
-			std::vector<PotionRecipe> foundRecipes = myWorkshop.searchRecipe(searchByIngredient);
-            if (!foundRecipes.empty()) {
-                std::cout << "검색 결과:" << std::endl;
-                for (const auto& recipe : foundRecipes) {
-                    std::cout << "- 물약 이름: " << recipe.potionName << std::endl;
-                    std::cout << "  > 필요 재료: ";
-                    for (size_t j = 0; j < recipe.ingredients.size(); ++j) {
-                        std::cout << recipe.ingredients[j];
-                        if (j < recipe.ingredients.size() - 1) {
-                            std::cout << ", ";
-                        }
-                    }
-                    std::cout << std::endl;
-				}
-			}
+            printRecipes(myWorkshop.searchRecipe(searchByIngredient));
 
         }
         else if (choice == 5) {
