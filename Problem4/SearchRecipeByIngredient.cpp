@@ -3,7 +3,7 @@
 SearchRecipeByIngredient::SearchRecipeByIngredient(string name) {
 	ingredientName = name;
 };
-vector<PotionRecipe> SearchRecipeByIngredient::search(const vector<PotionRecipe>& recipes) {
+vector<PotionRecipe> SearchRecipeByIngredient::search(const vector<PotionRecipe>& recipes) const{
     vector<PotionRecipe> recipe;
     if (recipes.empty()) {
         std::cout << "아직 등록된 레시피가 없습니다." << std::endl;

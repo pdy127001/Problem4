@@ -53,7 +53,9 @@ int main() {
         std::cout << "?? 연금술 공방 관리 시스템" << std::endl;
         std::cout << "1. 레시피 추가" << std::endl;
         std::cout << "2. 모든 레시피 출력" << std::endl;
-        std::cout << "3. 종료" << std::endl;
+        std::cout << "3. 물약 이름으로 검색" << std::endl;
+        std::cout << "4. 물약 재료로 검색" << std::endl;
+        std::cout << "5. 종료" << std::endl;
         std::cout << "선택: ";
 
         int choice;
@@ -102,6 +104,52 @@ int main() {
 
         }
         else if (choice == 3) {
+			std::string potionName;
+            std::cout << "물약 이름을 입력>>";
+			std::cin.ignore(10000, '\n');
+            std::getline(std::cin, potionName);
+			SearchRecipeByName searchByName(potionName);
+			std::vector<PotionRecipe> foundRecipes = myWorkshop.searchRecipe(searchByName);
+			if (!foundRecipes.empty()) {
+                std::cout << "검색 결과:" << std::endl;
+                for (const auto& recipe : foundRecipes) {
+                    std::cout << "- 물약 이름: " << recipe.potionName << std::endl;
+                    std::cout << "  > 필요 재료: ";
+                    for (size_t j = 0; j < recipe.ingredients.size(); ++j) {
+                        std::cout << recipe.ingredients[j];
+                        if (j < recipe.ingredients.size() - 1) {
+                            std::cout << ", ";
+                        }
+                    }
+                    std::cout << std::endl;
+                }
+			}
+
+        }
+        else if (choice == 4) {
+			std::string ingredientName;
+            std::cout << "물약 재료를 입력>>";
+			std::cin.ignore(10000, '\n');
+			std::getline(std::cin, ingredientName);
+			SearchRecipeByIngredient searchByIngredient(ingredientName);
+			std::vector<PotionRecipe> foundRecipes = myWorkshop.searchRecipe(searchByIngredient);
+            if (!foundRecipes.empty()) {
+                std::cout << "검색 결과:" << std::endl;
+                for (const auto& recipe : foundRecipes) {
+                    std::cout << "- 물약 이름: " << recipe.potionName << std::endl;
+                    std::cout << "  > 필요 재료: ";
+                    for (size_t j = 0; j < recipe.ingredients.size(); ++j) {
+                        std::cout << recipe.ingredients[j];
+                        if (j < recipe.ingredients.size() - 1) {
+                            std::cout << ", ";
+                        }
+                    }
+                    std::cout << std::endl;
+				}
+			}
+
+        }
+        else if (choice == 5) {
             std::cout << "공방 문을 닫습니다..." << std::endl;
             break;
 
