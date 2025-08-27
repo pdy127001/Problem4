@@ -126,12 +126,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SearchRecipeByIngredient.cpp" />
     <ClCompile Include="SearchRecipeByName.cpp" />
+    <ClCompile Include="StockManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PotionRecipe.h" />
     <ClInclude Include="SearchRecipe.h" />
     <ClInclude Include="SearchRecipeByIngredient.h" />
     <ClInclude Include="SearchRecipeByName.h" />
+    <ClInclude Include="StockManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
